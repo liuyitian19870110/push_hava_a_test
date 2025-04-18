@@ -1,0 +1,19 @@
+name: push_hava_a_test
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 11 19 4 *'
+  #   - cron: '15 14 13 4 *'  # 每年4月13日14:15 UTC（北京时间22:15）
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: push_hava_a_test
+        env:
+          SHOGUNCAO_HAVA_A_TEST_SSH_KEY: ${{ secrets.SHOGUNCAO_HAVA_A_TEST_SSH_KEY }}
+          TARGET_HAVA_A_TEST_SSH_KEY: ${{ secrets.TARGET_HAVA_A_TEST_SSH_KEY }}
+        run: |
+          chmod +x push_hava_a_test.sh
+          /bin/bash push_hava_a_test.sh
+        
